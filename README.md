@@ -12,6 +12,7 @@
 -   clean code
 -   ddd
 -   tdd
+-   node v16.13.1
 
 ## Techs
 
@@ -27,4 +28,12 @@ yarn
 # run development application
 npm run start:dev
 yarn start:dev
+
+# tests
+npm test
+yarn test
+
+# coverage
+npm run coverage
+yarn coverage
 ```
