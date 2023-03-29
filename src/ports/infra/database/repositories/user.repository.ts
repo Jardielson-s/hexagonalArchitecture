@@ -3,9 +3,11 @@ import { Repository } from '@src/shared/repository.base'
 import { prismaClient } from '../database.connection'
 import { UserInput } from '@src/core/user/use-cases/create-user.usecase'
 
-export const UserRepository = <Input>(): Repository<Input, UserEntity> =>({
+export const UserRepository = <Input>(): Repository<Input, UserEntity> => ({
 	async save(input: Input): Promise<UserEntity> {
-		const user = await prismaClient.user.create({ data: {...input} as UserInput})
+		const user = await prismaClient.user.create({
+			data: { ...input } as UserInput,
+		})
 		return new UserEntity(user)
 	},
 	async get(): Promise<UserEntity[]> {
@@ -30,5 +32,4 @@ export const UserRepository = <Input>(): Repository<Input, UserEntity> =>({
 		const user = await prismaClient.user.delete({ where: { id: id } })
 		return new UserEntity(user)
 	},
-}
-)
+})

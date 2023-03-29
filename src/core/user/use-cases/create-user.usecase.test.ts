@@ -13,13 +13,13 @@ const expectZodError = async (fn: Function, expect: Function) => {
 	try {
 		await fn()
 	} catch (err) {
-    const error = err as z.ZodError
-			expect(
-				error.issues.map(({ message, path }: z.ZodIssue) => ({
-					message,
-					path: path[0],
-				})),
-			)
+		const error = err as z.ZodError
+		expect(
+			error.issues.map(({ message, path }: z.ZodIssue) => ({
+				message,
+				path: path[0],
+			})),
+		)
 	}
 }
 describe('CreateUserUseCase', () => {

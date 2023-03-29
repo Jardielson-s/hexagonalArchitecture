@@ -13,7 +13,7 @@ export const adapter = (controller: Controller) => {
 			const response = await controller(request)
 			return res.status(200).json(response)
 		} catch (error: any) {
-			if(error instanceof z.ZodError){
+			if (error instanceof z.ZodError) {
 				return res.status(400).json(error)
 			}
 			return res.status(500).json(error)
