@@ -1,2 +1,5 @@
 node_modules
 coverage
+commitlint.config.js
+.husky
+.gitignore

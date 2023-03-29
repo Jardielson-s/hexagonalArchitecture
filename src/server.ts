@@ -1,8 +1,8 @@
-import { routes } from './adapters/http/express/routes'
+import { routes } from '@src/adapters/http/express/routes'
 import envs from './config/envs'
 
 const server = routes
 
-server.listen(envs.EXPRESS_PORT, () => {
-    console.log(`SERVER RUNING IN PORT: 8080`)
+server.listen(envs.PORT, () => {
+	console.log(`SERVER RUNING IN PORT: ${envs.PORT}`)
 })

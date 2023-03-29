@@ -6,13 +6,13 @@
 
 ## Info
 
--   hexagonal architecture
--   functional programming
--   solid principles
--   clean code
--   ddd
--   tdd
--   node v16.13.1
+- hexagonal architecture
+- functional programming
+- solid principles
+- clean code
+- ddd
+- tdd
+- node v16.13.1
 
 ## Techs
 
