@@ -1,3 +1,3 @@
-export type UseCase<T = any, K = any> = {
-    execute: (...args: T[]) => Promise<K>
+export type UseCase<K = any, T = any, R = any> = {
+	execute: (...dependencies: K[]) => (input: T) => Promise<R>
 }
