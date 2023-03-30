@@ -1,12 +1,12 @@
 import { describe, test, expect, vitest } from 'vitest'
 import { CreateUserUseCase, UserInput } from './create-user.usecase'
-import { Repository } from '@src/shared/repository.base'
-import { UserEntity } from '../entities/user.entity'
+import { UserRepository } from '@src/ports/infra/database/repositories/user.repository'
+
 import z from 'zod'
 
 const stub = {
 	save: vitest.fn(),
-} as unknown as Repository<UserInput, UserEntity>
+} as unknown as UserRepository<UserInput>
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 const expectZodError = async (fn: Function, expect: Function) => {
@@ -39,7 +39,11 @@ describe('CreateUserUseCase', () => {
 			...user,
 		})
 
-		const response = await CreateUserUseCase.execute({ Repositories: stub })({
+		const response = await CreateUserUseCase.execute({
+			Repositories: {
+				userRepository: stub,
+			},
+		})({
 			name: user.name,
 		})
 
@@ -51,7 +55,11 @@ describe('CreateUserUseCase', () => {
 	test('should be defined execute method error', async () => {
 		await expectZodError(
 			() =>
-				CreateUserUseCase.execute({ Repositories: stub })({
+				CreateUserUseCase.execute({
+					Repositories: {
+						userRepository: stub,
+					},
+				})({
 					name: '',
 				}),
 			(issue: z.ZodIssue[]) => {

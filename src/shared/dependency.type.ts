@@ -1,5 +1,7 @@
-import { Repository } from './repository.base'
+import { UserRepository } from '@src/ports/infra/database/repositories/user.repository'
 
-export type Dependencies<I, O> = {
-	Repositories: Repository<I, O>
+export type Dependencies<I> = {
+	Repositories: {
+		userRepository: UserRepository<I>
+	}
 }
