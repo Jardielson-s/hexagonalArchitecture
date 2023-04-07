@@ -22,9 +22,9 @@ describe('CreateUserUseCase', () => {
 
 		const response = await CreateUserUseCase.execute({
 			Repositories: {
-				userRepository: stub
+				userRepository: stub,
 			},
-			Utils: null
+			Utils: null,
 		})({
 			name: user.name,
 			email: user.email,
@@ -42,7 +42,7 @@ describe('CreateUserUseCase', () => {
 					Repositories: {
 						userRepository: stub,
 					},
-					Utils: null
+					Utils: null,
 				})({
 					name: '',
 					email: '',
@@ -54,9 +54,9 @@ describe('CreateUserUseCase', () => {
 						path: 'name',
 					},
 					{
-						message: "Email invalid format",
-       			path: "email",
-					}
+						message: 'Email invalid format',
+						path: 'email',
+					},
 				])
 			},
 		)

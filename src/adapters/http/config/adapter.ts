@@ -16,9 +16,9 @@ export const adapter = (controller: Controller) => {
 		} catch (err: unknown) {
 			if (err instanceof z.ZodError) {
 				const error = err.issues.map((issue) => {
-					return  {
+					return {
 						field: issue.path[0],
-						message: issue.message
+						message: issue.message,
 					}
 				})
 				return res.status(400).json({ message: error })
