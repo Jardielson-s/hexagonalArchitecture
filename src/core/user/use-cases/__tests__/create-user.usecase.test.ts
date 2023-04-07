@@ -1,8 +1,6 @@
 import { describe, test, expect, vitest } from 'vitest'
 import { CreateUserUseCase } from '../create-user.usecase'
-import { expectZodError, stub } from './user-mock'
-import { z } from 'zod'
-
+import { Param, expectZodError, stub } from './user-mock'
 
 describe('CreateUserUseCase', () => {
 	test('should be defined execute method', () => {
@@ -13,6 +11,7 @@ describe('CreateUserUseCase', () => {
 		const user = {
 			id: 'any-id',
 			name: 'Joe Doe',
+			email: 'joeDoe@gmail.com',
 			createdAt: new Date(),
 			updatedAt: new Date(),
 			deletedAt: null,
@@ -25,8 +24,10 @@ describe('CreateUserUseCase', () => {
 			Repositories: {
 				userRepository: stub,
 			},
+			Utils: null,
 		})({
 			name: user.name,
+			email: user.email,
 		})
 
 		expect(response.name).toEqual(user.name)
@@ -41,14 +42,20 @@ describe('CreateUserUseCase', () => {
 					Repositories: {
 						userRepository: stub,
 					},
+					Utils: null,
 				})({
 					name: '',
+					email: '',
 				}),
-			(issue: z.ZodIssue[]) => {
+			(issue: Param[]) => {
 				expect(issue).toStrictEqual([
 					{
 						message: 'String must contain at least 1 character(s)',
 						path: 'name',
+					},
+					{
+						message: 'Email invalid format',
+						path: 'email',
 					},
 				])
 			},

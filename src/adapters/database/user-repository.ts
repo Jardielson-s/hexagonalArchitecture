@@ -1,12 +1,22 @@
 import { UserEntity } from '@src/core/user/entities/user.entity'
 import { prismaClient } from '@src/adapters/database/database.connection'
-import { UserInput } from '@src/core/user/use-cases/create-user.usecase'
+import { CreateUserInput } from '@src/core/user/use-cases/create-user.usecase'
 import { UserRepository } from '@src/ports/infra/database/repositories/user.repository'
 
 export const userRepository = <Input>(): UserRepository<Input> => ({
-	async save(input: Input): Promise<UserEntity> {
+	async save(input: CreateUserInput): Promise<UserEntity> {
+		const emailAlreadyExists = await prismaClient.user.findUnique({
+			where: {
+				email: input.email,
+			},
+		})
+
+		if (emailAlreadyExists) {
+			throw new Error('emailAlreadyExists')
+		}
+
 		const user = await prismaClient.user.create({
-			data: { ...input } as UserInput,
+			data: { ...input } as CreateUserInput,
 		})
 		return new UserEntity(user)
 	},

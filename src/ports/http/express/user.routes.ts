@@ -1,11 +1,17 @@
+import { userRepository } from '@src/adapters/database/user-repository'
 import {
 	CreateUserUseCase,
-	UserInput,
+	CreateUserInput,
 } from '@src/core/user/use-cases/create-user.usecase'
-import { UserRepository } from '@src/ports/infra/database/repositories/user.repository'
+import { selectFields } from '@src/utils/select-fields'
 
 export const userRoutes = {
 	post: CreateUserUseCase.execute({
-		Repositories: UserRepository<UserInput>(),
+		Repositories: {
+			userRepository: userRepository<CreateUserInput>(),
+		},
+		Utils: {
+			selectFields: selectFields,
+		},
 	}),
 }

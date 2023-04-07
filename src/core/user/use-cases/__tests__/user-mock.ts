@@ -1,14 +1,21 @@
-import { UserInput } from '@src/core/user/use-cases/create-user.usecase'
+import { CreateUserInput } from '@src/core/user/use-cases/create-user.usecase'
 import { UserRepository } from '@src/ports/infra/database/repositories/user.repository'
 import { vitest } from 'vitest'
 import z from 'zod'
 
 export const stub = {
 	save: vitest.fn(),
-} as unknown as UserRepository<UserInput>
+} as unknown as UserRepository<CreateUserInput>
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-export const expectZodError = async (fn: Function, expect: Function) => {
+export type Param = { message: string; path: string | number | undefined }
+export type ZOdErrorInput = {
+	(param: Param[]): void
+}
+
+export const expectZodError = async (
+	fn: () => Promise<unknown>,
+	expect: ZOdErrorInput,
+) => {
 	try {
 		await fn()
 	} catch (err) {
