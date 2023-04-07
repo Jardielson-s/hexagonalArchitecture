@@ -11,6 +11,7 @@ describe('CreateUserUseCase', () => {
 		const user = {
 			id: 'any-id',
 			name: 'Joe Doe',
+			email: 'joeDoe@gmail.com',
 			createdAt: new Date(),
 			updatedAt: new Date(),
 			deletedAt: null,
@@ -21,10 +22,12 @@ describe('CreateUserUseCase', () => {
 
 		const response = await CreateUserUseCase.execute({
 			Repositories: {
-				userRepository: stub,
+				userRepository: stub
 			},
+			Utils: null
 		})({
 			name: user.name,
+			email: user.email,
 		})
 
 		expect(response.name).toEqual(user.name)
@@ -39,8 +42,10 @@ describe('CreateUserUseCase', () => {
 					Repositories: {
 						userRepository: stub,
 					},
+					Utils: null
 				})({
 					name: '',
+					email: '',
 				}),
 			(issue: Param[]) => {
 				expect(issue).toStrictEqual([
@@ -48,6 +53,10 @@ describe('CreateUserUseCase', () => {
 						message: 'String must contain at least 1 character(s)',
 						path: 'name',
 					},
+					{
+						message: "Email invalid format",
+       			path: "email",
+					}
 				])
 			},
 		)

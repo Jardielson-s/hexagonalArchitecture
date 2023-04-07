@@ -2,6 +2,9 @@ import z from 'zod'
 
 const Id = z.string().uuid().nullish()
 const Name = z.string().min(1)
+const Email = z.string().email({
+	message: 'Email invalid format',
+})
 const Employee = z.array(z.string()).optional()
 const CreatedAt = z.date().nullish()
 const UpdatedAt = z.date().nullish()
@@ -10,6 +13,7 @@ const DeletedAt = z.date().nullish()
 export const UserObject = z.object({
 	id: Id,
 	name: Name,
+	email: Email,
 	employee: Employee,
 	createdAt: CreatedAt,
 	updatedAt: UpdatedAt,
@@ -22,6 +26,7 @@ export type UserOutput = UserEntity
 export class UserEntity {
 	id!: string
 	name!: string
+	email!: string
 	employee?: string[]
 	createdAt!: Date
 	updatedAt!: Date

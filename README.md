@@ -12,6 +12,7 @@
 
 - hexagonal architecture
 - functional programming
+- Object-oriented programming
 - solid principles
 - clean code
 - ddd
