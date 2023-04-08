@@ -21,7 +21,7 @@ export const adapter = (controller: Controller) => {
 						message: issue.message,
 					}
 				})
-				return res.status(400).json({ message: error })
+				return res.status(400).json({ error: error })
 			}
 			const error = responseError(err as Error)
 			return res.status(error.code).json({ message: error.message })
