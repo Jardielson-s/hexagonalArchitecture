@@ -1,6 +1,6 @@
 import z from 'zod'
 
-const Id = z.string().uuid().nullish()
+export const Id = z.string().uuid().nullish()
 const Name = z.string().min(1)
 const Email = z.string().email({
 	message: 'Email invalid format',

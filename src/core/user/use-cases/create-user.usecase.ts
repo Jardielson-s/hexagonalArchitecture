@@ -11,14 +11,14 @@ const ValidInput = UserObject.pick({
 export type CreateUserInput = z.infer<typeof ValidInput>
 
 const execute =
-	({ Repositories }: Dependencies<CreateUserInput>) =>
+	({ Repositories }: Dependencies) =>
 	async (input: CreateUserInput): Promise<UserOutput> => {
 		const user = new UserEntity(input)
 		return await Repositories.userRepository.save(user)
 	}
 
 export const CreateUserUseCase: UseCase<
-	Dependencies<CreateUserInput>,
+	Dependencies,
 	CreateUserInput,
 	UserEntity
 > = {

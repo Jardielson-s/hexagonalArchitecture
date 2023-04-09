@@ -9,6 +9,7 @@ export const adapter = (controller: Controller) => {
 		const request = {
 			...req.body,
 			...req.query,
+			...req.params,
 		}
 		try {
 			const response = await controller(request)

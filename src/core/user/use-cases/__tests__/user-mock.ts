@@ -1,11 +1,13 @@
-import { CreateUserInput } from '@src/core/user/use-cases/create-user.usecase'
 import { UserRepository } from '@src/ports/infra/database/repositories/user.repository'
 import { vitest } from 'vitest'
 import z from 'zod'
 
 export const stub = {
 	save: vitest.fn(),
-} as unknown as UserRepository<CreateUserInput>
+	getById: vitest.fn(),
+	update: vitest.fn(),
+	findEmail: vitest.fn(),
+} as unknown as UserRepository
 
 export type Param = { message: string; path: string | number | undefined }
 export type ZOdErrorInput = {

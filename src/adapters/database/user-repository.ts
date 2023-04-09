@@ -2,8 +2,9 @@ import { UserEntity } from '@src/core/user/entities/user.entity'
 import { prismaClient } from '@src/adapters/database/database.connection'
 import { CreateUserInput } from '@src/core/user/use-cases/create-user.usecase'
 import { UserRepository } from '@src/ports/infra/database/repositories/user.repository'
+import { UpdateUserInput } from '@src/core/user/use-cases/update-user.usecase'
 
-export const userRepository = <Input>(): UserRepository<Input> => ({
+export const userRepository = (): UserRepository => ({
 	async save(input: CreateUserInput): Promise<UserEntity> {
 		const emailAlreadyExists = await prismaClient.user.findUnique({
 			where: {
@@ -31,7 +32,7 @@ export const userRepository = <Input>(): UserRepository<Input> => ({
 		}
 		return null
 	},
-	async update(id: string, input: Input): Promise<UserEntity> {
+	async update(id: string, input: UpdateUserInput): Promise<UserEntity> {
 		const user = await prismaClient.user.update({
 			where: { id: id },
 			data: { ...input } as UserEntity,
@@ -41,5 +42,16 @@ export const userRepository = <Input>(): UserRepository<Input> => ({
 	async physicalDelete(id: string): Promise<UserEntity> {
 		const user = await prismaClient.user.delete({ where: { id: id } })
 		return new UserEntity(user)
+	},
+	async findEmail(email: string): Promise<string | null> {
+		const findEmail = await prismaClient.user.findFirst({
+			where: {
+				email: email,
+			},
+			select: {
+				email: true,
+			},
+		})
+		return findEmail?.email || null
 	},
 })
