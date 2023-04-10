@@ -12,4 +12,5 @@ const routes = app
 routes.use('/doc', swaggerUi.serve, swaggerUi.setup(specs))
 routes.get('/health-check', adapter(healthCheckRoutes.getHealthCheck))
 routes.post('/user', adapter(userRoutes.post))
+routes.patch('/user/:id', adapter(userRoutes.update))
 export { routes }

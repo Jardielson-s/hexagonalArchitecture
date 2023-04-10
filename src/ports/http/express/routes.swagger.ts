@@ -17,7 +17,47 @@
  *      example:
  *        name: Joe Doe
  *        email: joeDoe@gmail.com
+ *    ResponseMutationUser:
+ *      type: object
+ *      required:
+ *        - id
+ *        - name
+ *        - email
+ *        - createdAt
+ *        - updatedAt
+ *        - deletedAt
+ *      properties:
+ *        id:
+ *          type: string
+ *          description: User id
+ *        name:
+ *          type: string
+ *          description: User name
+ *        email:
+ *          type: string
+ *          description: User email
+ *        createdAt:
+ *          type: string
+ *          description: User created
+ *        updatedAt:
+ *          type: string
+ *          description: User updated
+ *        deletedAt:
+ *          type: string
+ *          description: User deledted
+ *      example:
+ *        id: 2f976769-fb80-4ea8-9249-8f49ea259a76
+ *        name: Joe Doe
+ *        email: joeDoe@gmail.com
+ *        createdAt: 2023-04-08T22:57:55.047Z
+ *        updatedAt: 2023-04-08T22:57:55.047Z
+ *        deleledAt: null
  *    EmailAlreadyExists:
+ *      type: object
+ *      properties:
+ *        message:
+ *          type: string
+ *    UserNotFound:
  *      type: object
  *      properties:
  *        message:
@@ -35,7 +75,6 @@
  *              message:
  *                type: string
  */
-
 
 /**
  * @swagger
@@ -103,4 +142,53 @@
  *                 summary: an example of FieldInvalid
  *                 value:
  *                   error: [{ "field": "name", "message": "String must contain at least 1 character(s)"}, { "field": "email", "message": "Email invalid format" }]
+ */
+/**
+ * @swagger
+ * /user/{id}:
+ *  patch:
+ *    summary: Update User
+ *    tags: [User]
+ *    parameters:
+ *     - in: path
+ *       name: 'id'
+ *       required: true
+ *       schema:
+ *         type: string
+ *         example: 2f976769-fb80-4ea8-9249-8f49ea259a76
+ *    requestBody:
+ *       required: true
+ *       content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/User'
+ *    responses:
+ *       200:
+ *         description: The user was successfully updated
+ *         content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/ResponseMutationUser'
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *              oneOf:
+ *                - $ref: '#/components/schemas/EmailAlreadyExists'
+ *                - $ref: '#/components/schemas/FieldInvalid'
+ *                - $ref: '#/components/schemas/UserNotFound'
+ *             examples:
+ *               EmailAlreadyExists:
+ *                 summary: An example of EmailAlreadyExists
+ *                 value:
+ *                   message: Email already exists
+ *               FieldInvalid:
+ *                 summary: an example of FieldInvalid
+ *                 value:
+ *                   error: [{ "field": "name", "message": "String must contain at least 1 character(s)"}, { "field": "email", "message": "Email invalid format" }]
+ *               UserNotFound:
+ *                 summary: an example userNotFoundError
+ *                 value:
+ *                   message: User not found
  */

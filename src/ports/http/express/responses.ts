@@ -9,4 +9,12 @@ export const messageError: ResponseErrorType = {
 		code: 400,
 		message: 'User email already exists',
 	},
+	userEmailAlreadyExists: {
+		code: 400,
+		message: 'User email already exists',
+	},
+	userNotFound: {
+		code: 404,
+		message: 'User not found',
+	},
 }
