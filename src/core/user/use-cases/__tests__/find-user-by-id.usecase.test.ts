@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vitest } from 'vitest'
 import { FindUserByIdUseCase } from '../find-user-by-id.usecase'
-import { Param, expectZodError, stub } from './user-mock'
+import { stub } from './user-mock'
 
 describe('FindUserById', () => {
 	beforeEach(() => {

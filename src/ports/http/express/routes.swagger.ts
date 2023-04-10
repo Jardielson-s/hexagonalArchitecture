@@ -222,10 +222,10 @@
  *                  value: { "id": "1239189f-e00d-4484-b408-a9f92a54e0ee", "name": "Joe Doe", "email": "joe@gmail.com", "createdAt": "2023-04-10T22:12:20.852Z", "updatedAt": "2023-04-10T22:12:20.852Z", "deletedAt": null }
  *               UserNotFound:
  *                  summary: user not found
- *                  value: 
+ *                  value:
  *                     message: 'userNotFound'
  *               FieldInvalid:
  *                  summary: user id invalid
  *                  value: { "error": [ { "field": "id", "message": "Invalid uuid" } ] }
- *    
+ *
  */
