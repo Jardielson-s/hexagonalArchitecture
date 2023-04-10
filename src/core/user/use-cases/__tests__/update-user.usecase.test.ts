@@ -32,7 +32,6 @@ describe('UpdateUserUseCase', () => {
 			Repositories: {
 				userRepository: stub,
 			},
-			Utils: null,
 		})({
 			id: '2f976769-fb80-4ea8-9249-8f49ea259a76',
 			name: 'Test update',
@@ -50,7 +49,6 @@ describe('UpdateUserUseCase', () => {
 					Repositories: {
 						userRepository: stub,
 					},
-					Utils: null,
 				})({
 					id: '',
 					name: '',
@@ -73,7 +71,6 @@ describe('UpdateUserUseCase', () => {
 				Repositories: {
 					userRepository: stub,
 				},
-				Utils: null,
 			})({
 				id: '2f976769-fb80-4ea8-9249-8f49ea259a71',
 				name: 'Test update',
@@ -101,7 +98,6 @@ describe('UpdateUserUseCase', () => {
 				Repositories: {
 					userRepository: stub,
 				},
-				Utils: null,
 			})({
 				id: user.id,
 				name: 'Test update',

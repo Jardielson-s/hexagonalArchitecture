@@ -1,14 +1,11 @@
 import { userRepository } from '@src/adapters/database/user-repository'
 import { CreateUserUseCase } from '@src/core/user/use-cases/create-user.usecase'
+import { FindUserByIdUseCase } from '@src/core/user/use-cases/find-user-by-id.usecase'
 import { UpdateUserUseCase } from '@src/core/user/use-cases/update-user.usecase'
-import { selectFields } from '@src/utils/select-fields'
 
 const Dependencies = {
 	Repositories: {
 		userRepository: userRepository(),
-	},
-	Utils: {
-		selectFields: selectFields,
 	},
 }
 
@@ -17,6 +14,9 @@ export const userRoutes = {
 		...Dependencies,
 	}),
 	update: UpdateUserUseCase.execute({
+		...Dependencies,
+	}),
+	findUserById: FindUserByIdUseCase.execute({
 		...Dependencies,
 	}),
 }
