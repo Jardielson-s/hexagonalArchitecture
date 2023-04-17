@@ -15,5 +15,6 @@ routes.post('/user', adapter(userRoutes.post))
 routes.patch('/user/:id', adapter(userRoutes.update))
 routes.get('/user/:id', adapter(userRoutes.findUserById))
 routes.delete('/user/:id', adapter(userRoutes.physicalDelete))
+routes.get('/user', adapter(userRoutes.getUsers))
 
 export { routes }
