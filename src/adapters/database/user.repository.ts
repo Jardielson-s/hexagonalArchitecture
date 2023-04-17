@@ -4,9 +4,11 @@ import { CreateUserInput } from '@src/core/user/use-cases/create-user.usecase'
 import { UserRepository } from '@src/ports/infra/database/repositories/user.repository'
 import { UpdateUserInput } from '@src/core/user/use-cases/update-user.usecase'
 
-export const userRepository = (): UserRepository => ({
+export const userRepository = (
+	prisma: typeof prismaClient,
+): UserRepository => ({
 	async save(input: CreateUserInput): Promise<UserEntity> {
-		const emailAlreadyExists = await prismaClient.user.findUnique({
+		const emailAlreadyExists = await prisma.user.findUnique({
 			where: {
 				email: input.email,
 			},
@@ -16,35 +18,35 @@ export const userRepository = (): UserRepository => ({
 			throw new Error('emailAlreadyExists')
 		}
 
-		const user = await prismaClient.user.create({
+		const user = await prisma.user.create({
 			data: { ...input } as CreateUserInput,
 		})
 		return new UserEntity(user)
 	},
 	async get(): Promise<UserEntity[]> {
-		const users = await prismaClient.user.findMany()
+		const users = await prisma.user.findMany()
 		return users.map((user) => new UserEntity(user))
 	},
 	async getById(id: string): Promise<UserEntity | null> {
-		const user = await prismaClient.user.findUnique({ where: { id: id } })
+		const user = await prisma.user.findUnique({ where: { id: id } })
 		if (user) {
 			return new UserEntity(user)
 		}
 		return null
 	},
 	async update(id: string, input: UpdateUserInput): Promise<UserEntity> {
-		const user = await prismaClient.user.update({
+		const user = await prisma.user.update({
 			where: { id: id },
 			data: { ...input } as UserEntity,
 		})
 		return new UserEntity(user)
 	},
 	async physicalDelete(id: string): Promise<UserEntity> {
-		const user = await prismaClient.user.delete({ where: { id: id } })
+		const user = await prisma.user.delete({ where: { id: id } })
 		return new UserEntity(user)
 	},
 	async findEmail(email: string): Promise<string | null> {
-		const findEmail = await prismaClient.user.findFirst({
+		const findEmail = await prisma.user.findFirst({
 			where: {
 				email: email,
 			},

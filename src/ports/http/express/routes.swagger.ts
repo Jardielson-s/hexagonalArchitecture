@@ -192,3 +192,40 @@
  *                 value:
  *                   message: User not found
  */
+
+/**
+ * @swagger
+ * /user/{id}:
+ *  get:
+ *    description: Find User By Id
+ *    tags: [User]
+ *    parameters:
+ *      - in: path
+ *        name: 'id'
+ *        required: true
+ *        schema:
+ *          type: string
+ *          example: 1239189f-e00d-4484-b408-a9f92a54e0ee
+ *    responses:
+ *      200:
+ *        describe: find user
+ *        content:
+ *          application/json:
+ *            schema:
+ *              oneOf:
+ *                - $ref: '#/components/schemas/User'
+ *                - $ref: '#/components/schemas/UserNotFound'
+ *                - $ref: '#/components/schemas/FieldInvalid'
+ *            examples:
+ *               User:
+ *                  summary: user found
+ *                  value: { "id": "1239189f-e00d-4484-b408-a9f92a54e0ee", "name": "Joe Doe", "email": "joe@gmail.com", "createdAt": "2023-04-10T22:12:20.852Z", "updatedAt": "2023-04-10T22:12:20.852Z", "deletedAt": null }
+ *               UserNotFound:
+ *                  summary: user not found
+ *                  value:
+ *                     message: 'userNotFound'
+ *               FieldInvalid:
+ *                  summary: user id invalid
+ *                  value: { "error": [ { "field": "id", "message": "Invalid uuid" } ] }
+ *
+ */

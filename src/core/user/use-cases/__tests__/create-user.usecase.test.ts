@@ -24,7 +24,6 @@ describe('CreateUserUseCase', () => {
 			Repositories: {
 				userRepository: stub,
 			},
-			Utils: null,
 		})({
 			name: user.name,
 			email: user.email,
@@ -42,7 +41,6 @@ describe('CreateUserUseCase', () => {
 					Repositories: {
 						userRepository: stub,
 					},
-					Utils: null,
 				})({
 					name: '',
 					email: '',
