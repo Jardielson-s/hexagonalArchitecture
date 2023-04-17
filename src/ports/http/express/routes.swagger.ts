@@ -74,6 +74,39 @@
  *                type: string
  *              message:
  *                type: string
+ *    Users:
+ *      type: array
+ *      items:
+ *        type: object
+ *        properties:
+ *          id:
+ *            type: string
+ *            description: User id
+ *          name:
+ *            type: string
+ *            description: User name
+ *          email:
+ *            type: string
+ *            description: User email
+ *          createdAt:
+ *            type: string
+ *            description: User created
+ *          updatedAt:
+ *            type: string
+ *            description: User updated
+ *          deletedAt:
+ *            type: string
+ *            description: User deledted
+ *        example:
+ *          id: 2f976769-fb80-4ea8-9249-8f49ea259a76
+ *          name: Joe Doe
+ *          email: joeDoe@gmail.com
+ *          createdAt: 2023-04-08T22:57:55.047Z
+ *          updatedAt: 2023-04-08T22:57:55.047Z
+ *          deleledAt: null
+ *    Array:
+ *      schema:
+ *        type: array
  */
 
 /**
@@ -228,4 +261,48 @@
  *                  summary: user id invalid
  *                  value: { "error": [ { "field": "id", "message": "Invalid uuid" } ] }
  *
+ */
+
+/**
+ * @swagger
+ * /user:
+ *  get:
+ *    description: Get Users
+ *    tags: [User]
+ *    parameters:
+ *      - in: query
+ *        name: page
+ *        schema:
+ *           type: integer
+ *      - in: query
+ *        name: limit
+ *        schema:
+ *          type: integer
+ *      - in: query
+ *        name: serach
+ *        schema:
+ *          type: string
+ *      - in: query
+ *        name: orderBy
+ *        schema:
+ *          type: string
+ *        example:
+ *          name:asc
+ *    responses:
+ *      200:
+ *        describe: find user
+ *        content:
+ *          application/json:
+ *            schema:
+ *              oneOf:
+ *                - $ref: '#/components/schemas/Users'
+ *                - $ref: '#/components/schemas/Array'
+ *            examples:
+ *              User:
+ *                 summary: user array
+ *                 value: [{ "id": "1239189f-e00d-4484-b408-a9f92a54e0ee", "name": "Joe Doe", "email": "joe@gmail.com", "createdAt": "2023-04-10T22:12:20.852Z", "updatedAt": "2023-04-10T22:12:20.852Z", "deletedAt": null }]
+ *              Array:
+ *                 summary: user array void
+ *                 value:
+ *                    []
  */

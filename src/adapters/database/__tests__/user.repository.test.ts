@@ -55,7 +55,7 @@ describe('UserRepsoitory', () => {
 		])
 
 		expect(await userRepository(stub).get({})).toBeDefined()
-		expect(await userRepository(stub).get({search: 'Joe'})).toBeDefined()
+		expect(await userRepository(stub).get({ search: 'Joe' })).toBeDefined()
 	})
 
 	it('should be defined getById function', async () => {

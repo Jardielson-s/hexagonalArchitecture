@@ -28,7 +28,7 @@ export const userRepository = (
 		page,
 		limit,
 		search,
-		include
+		include,
 	}: {
 		orderBy?: Record<string, unknown>
 		page?: number
@@ -36,12 +36,11 @@ export const userRepository = (
 		search?: string
 		include?: Record<string, unknown>
 	}): Promise<UserEntity[]> {
-		const wheteImpl =  search ? {
-			OR: [
-				{ name: search},
-				{ email: search }
-			]
-		} : {}
+		const wheteImpl = search
+			? {
+					OR: [{ name: search }, { email: search }],
+			  }
+			: {}
 		const users = await prisma.user.findMany({
 			orderBy: orderBy,
 			skip: page,

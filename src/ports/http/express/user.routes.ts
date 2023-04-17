@@ -9,7 +9,7 @@ import { UpdateUserUseCase } from '@src/core/user/use-cases/update-user.usecase'
 const Dependencies = {
 	Repositories: {
 		userRepository: userRepository(prismaClient),
-	}
+	},
 }
 
 export const userRoutes = {

@@ -16,7 +16,7 @@ export default defineConfig({
 			branches: 90,
 			statements: 90,
 			functions: 90,
-			lines: 90
+			lines: 90,
 		},
 		include: ['**/src/core/**/*.test.ts', '**/src/adapters/**/*.test.ts'],
 	},
