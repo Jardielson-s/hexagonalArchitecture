@@ -7,6 +7,7 @@ export const stub = {
 	getById: vitest.fn(),
 	update: vitest.fn(),
 	findEmail: vitest.fn(),
+	physicalDelete: vitest.fn(),
 } as unknown as UserRepository
 
 export type Param = { message: string; path: string | number | undefined }
