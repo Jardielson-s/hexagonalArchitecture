@@ -5,7 +5,7 @@ const Name = z.string().min(1)
 const Email = z.string().email({
 	message: 'Email invalid format',
 })
-const Employee = z.array(z.string()).optional()
+const Employee = z.array(z.record(z.any())).optional()
 const CreatedAt = z.date().nullish()
 const UpdatedAt = z.date().nullish()
 const DeletedAt = z.date().nullish()
@@ -14,7 +14,7 @@ export const UserObject = z.object({
 	id: Id,
 	name: Name,
 	email: Email,
-	employee: Employee,
+	employees: Employee,
 	createdAt: CreatedAt,
 	updatedAt: UpdatedAt,
 	deletedAt: DeletedAt,
@@ -27,7 +27,7 @@ export class UserEntity {
 	id!: string
 	name!: string
 	email!: string
-	employee?: string[]
+	employee?: Record<string, any>[]
 	createdAt!: Date
 	updatedAt!: Date
 	deletedAt!: Date | null

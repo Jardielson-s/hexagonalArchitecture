@@ -53,9 +53,11 @@ describe('UserRepsoitory', () => {
 				deletedAt: null,
 			},
 		])
+		vitest.spyOn(stub.user, 'count').mockResolvedValue(1)
 
 		expect(await userRepository(stub).get({})).toBeDefined()
-		expect(await userRepository(stub).get({ search: 'Joe' })).toBeDefined()
+		const response = await userRepository(stub).get({ search: 'Joe' })
+		expect(response.total).toBe(1)
 	})
 
 	it('should be defined getById function', async () => {

@@ -16,7 +16,12 @@ export type UserRepository = {
 		limit?: number
 		search?: string
 		include?: Record<string, unknown>
-	}) => Promise<UserEntity[] | []>
+	}) => Promise<{
+		page: number
+		limit: number
+		total: number
+		results: UserEntity[]
+	}>
 	getById: (id: string) => Promise<UserEntity | null>
 	update: (id: string, input: UpdateUserInput) => Promise<UserEntity>
 	physicalDelete: (id: string) => Promise<UserEntity>

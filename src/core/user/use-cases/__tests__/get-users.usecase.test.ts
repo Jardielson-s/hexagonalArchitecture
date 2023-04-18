@@ -12,16 +12,21 @@ describe('GetUsers', () => {
 	})
 
 	it('should be execute function success', async () => {
-		vitest.spyOn(stub, 'get').mockResolvedValue([
-			{
-				id: '1239189f-e00d-4484-b408-a9f92a54e0ee',
-				name: 'Joe Doe',
-				email: 'joe@gmail.com',
-				createdAt: new Date(),
-				updatedAt: new Date(),
-				deletedAt: null,
-			},
-		])
+		vitest.spyOn(stub, 'get').mockResolvedValue({
+			page: 1,
+			limit: 10,
+			total: 1,
+			results: [
+				{
+					id: '1239189f-e00d-4484-b408-a9f92a54e0ee',
+					name: 'Joe Doe',
+					email: 'joe@gmail.com',
+					createdAt: new Date(),
+					updatedAt: new Date(),
+					deletedAt: null,
+				},
+			],
+		})
 		const response = await GetUsersUseCase.execute({
 			Repositories: { userRepository: stub },
 		})({})
@@ -30,16 +35,21 @@ describe('GetUsers', () => {
 	})
 
 	it('should be execute function with query', async () => {
-		vitest.spyOn(stub, 'get').mockResolvedValue([
-			{
-				id: '1239189f-e00d-4484-b408-a9f92a54e0ee',
-				name: 'Joe Doe',
-				email: 'joe@gmail.com',
-				createdAt: new Date(),
-				updatedAt: new Date(),
-				deletedAt: null,
-			},
-		])
+		vitest.spyOn(stub, 'get').mockResolvedValue({
+			page: 1,
+			limit: 10,
+			total: 1,
+			results: [
+				{
+					id: '1239189f-e00d-4484-b408-a9f92a54e0ee',
+					name: 'Joe Doe',
+					email: 'joe@gmail.com',
+					createdAt: new Date(),
+					updatedAt: new Date(),
+					deletedAt: null,
+				},
+			],
+		})
 		const response = await GetUsersUseCase.execute({
 			Repositories: { userRepository: stub },
 		})({

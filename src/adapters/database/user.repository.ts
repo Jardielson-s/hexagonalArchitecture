@@ -35,21 +35,36 @@ export const userRepository = (
 		limit?: number
 		search?: string
 		include?: Record<string, unknown>
-	}): Promise<UserEntity[]> {
+	}): Promise<{
+		page: number
+		limit: number
+		total: number
+		results: UserEntity[]
+	}> {
 		const wheteImpl = search
 			? {
 					OR: [{ name: search }, { email: search }],
 			  }
 			: {}
-		const users = await prisma.user.findMany({
-			orderBy: orderBy,
-			skip: page,
-			take: limit,
-			where: wheteImpl,
-			include: include,
-		})
-
-		return users.map((user) => new UserEntity(user as unknown as UserEntity))
+		const [count, users] = await Promise.all([
+			prisma.user.count(),
+			prisma.user.findMany({
+				orderBy: orderBy,
+				skip: page,
+				take: limit,
+				where: wheteImpl,
+				include: include,
+			}),
+		])
+		const data = {
+			page: page || 1,
+			limit: limit || 10,
+			total: count,
+			results: users.map(
+				(user) => new UserEntity(user as unknown as UserEntity),
+			),
+		}
+		return data
 	},
 	async getById(id: string): Promise<UserEntity | null> {
 		const user = await prisma.user.findUnique({ where: { id: id } })
