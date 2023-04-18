@@ -13,6 +13,10 @@ export default defineConfig({
 		coverage: {
 			include: ['**/src/core/**/*.ts', '**/src/adapters/**/*.repository.ts'],
 			all: true,
+			branches: 90,
+			statements: 90,
+			functions: 90,
+			lines: 90,
 		},
 		include: ['**/src/core/**/*.test.ts', '**/src/adapters/**/*.test.ts'],
 	},

@@ -9,5 +9,6 @@ export const stub = {
 		update: vitest.fn(),
 		delete: vitest.fn(),
 		findFirst: vitest.fn(),
+		count: vitest.fn(),
 	},
 } as unknown as PrismaClient

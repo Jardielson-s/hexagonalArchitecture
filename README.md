@@ -47,8 +47,8 @@ npm test
 yarn test
 
 # coverage
-npm run coverage
-yarn coverage
+npm run test:cov
+yarn test:cov
 ```
 
 <br/>

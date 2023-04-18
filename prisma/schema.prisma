@@ -15,6 +15,8 @@ model User {
   createdAt DateTime   @default(now())
   updatedAt DateTime   @default(now())
   deletedAt DateTime?
+
+  @@map("users")
 }
 
 model Employee {
@@ -26,4 +28,6 @@ model Employee {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @default(now())
   deletedAt DateTime?
+
+  @@map("employees")
 }
